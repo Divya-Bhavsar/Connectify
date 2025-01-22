@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -40,6 +41,7 @@ android {
 }
 
 dependencies {
+    implementation(libs.firebase.auth.ktx)
     val nav_version = "2.8.5"
     implementation("androidx.navigation:navigation-compose:$nav_version") //for navigation
     implementation(libs.androidx.core.ktx)
@@ -57,5 +59,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(platform("com.google.firebase:firebase-bom:33.8.0"))
+    implementation("com.google.firebase:firebase-analytics-ktx:22.2.0")
     implementation("androidx.constraintlayout:constraintlayout-compose:1.0.1")
+
+
+
+
+
 }

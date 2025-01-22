@@ -1,8 +1,8 @@
 package com.example.socialmedia.screens
-
 import android.window.SplashScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -16,9 +16,8 @@ import androidx.navigation.NavHostController
 import com.example.socialmedia.Navigation.Routes
 import kotlinx.coroutines.delay
 import com.example.socialmedia.R
-
-
-
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
 
 
 @Composable
@@ -39,7 +38,16 @@ fun Splash(navController: NavHostController){
     LaunchedEffect(true) {
         delay(3000)
 
-        navController.navigate(Routes.BottomNav.routes)
+        if(FirebaseAuth.getInstance().currentUser!=null)
+        navController.navigate(Routes.BottomNav.routes){
+            popUpTo(navController.graph.startDestinationId)
+            launchSingleTop=true
+        }
+        else
+            navController.navigate((Routes.Login.routes)){
+                popUpTo(navController.graph.startDestinationId)
+                launchSingleTop=true
+            }
     }
 
 }
